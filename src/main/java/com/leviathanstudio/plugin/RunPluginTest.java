@@ -1,6 +1,6 @@
 package com.leviathanstudio.plugin;
 
-import plugin.fr.scarex.onf.ObfuscatedNameFinder;
+import plugin.fr.scarex.obfuscatednamefinder.ui.ObfuscatedNameFinderFrame;
 
 public class RunPluginTest extends MineIDEPlugin
 {
@@ -17,14 +17,20 @@ public class RunPluginTest extends MineIDEPlugin
     
     @Override
     public void initPlugin()
+    {}
+    
+    @Override
+    public void initPlugin(String[] args)
     {
-        new ObfuscatedNameFinder();
+        ObfuscatedNameFinderFrame.main(args);
     }
     
     // Debug
     public static void main(String[] args)
     {
         RunPluginTest test = new RunPluginTest();
+        test.executePlugin(args);
         test.executePlugin();
     }
+    
 }

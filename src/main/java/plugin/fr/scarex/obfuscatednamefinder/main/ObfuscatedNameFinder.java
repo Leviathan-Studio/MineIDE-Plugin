@@ -1,8 +1,7 @@
-package plugin.fr.scarex.onf;
+package plugin.fr.scarex.obfuscatednamefinder.main;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,16 +44,8 @@ public class ObfuscatedNameFinder extends JFrame implements ActionListener
     
     public ObfuscatedNameFinder()
     {
-        this.setTitle("Obfuscated Name Finder " + VERSION);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);
-        
         this.findForgeVersions();
         this.init();
-        
-        this.setMinimumSize(new Dimension(600, 300));
-        this.setLocationRelativeTo(null);
-        this.pack();
     }
     
     private void findForgeVersions()

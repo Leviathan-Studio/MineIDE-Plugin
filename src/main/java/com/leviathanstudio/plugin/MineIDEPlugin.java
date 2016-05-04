@@ -63,13 +63,34 @@ public abstract class MineIDEPlugin
     
     public abstract void initPlugin();
     
+    public abstract void initPlugin(String[] args);
+    
     public void executePlugin()
     {
         this.preInitPlugin();
         this.checkPluginInformation();
         
         if(!this.isInformationIncomplete())
+        {
             this.initPlugin();
+        }
+        else
+        {
+            System.err.println("[MineIDE-Plugin] Incomplete Plugin Information {");
+            for(int i = 0; i < nullPluginList.size(); i++)
+                System.err.println(nullPluginList.get(i));
+                
+            System.err.println("}");
+        }
+    }
+    
+    public void executePlugin(String[] args)
+    {
+        this.preInitPlugin();
+        this.checkPluginInformation();
+        
+        if(!this.isInformationIncomplete())
+            this.initPlugin(args);
         else
         {
             System.err.println("[MineIDE-Plugin] Incomplete Plugin Information {");
