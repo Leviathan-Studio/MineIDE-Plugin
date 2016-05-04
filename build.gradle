@@ -1,0 +1,84 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven {
+            url 'http://maven.ferenyr.info/artifactory/plugins-release'
+            credentials {
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+            }
+        }
+    }
+    dependencies {
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.0.0"
+    }
+}
+
+repositories {
+        mavenCentral()
+        maven {
+            url = 'https://oss.sonatype.org/content/repositories/releases/'
+        }
+        maven {
+            url "http://files.minecraftforgefrance.fr/maven/"
+        }
+        maven {
+            url = 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
+    }
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+group = "com.leviathanstudio.mineide"
+archivesBaseName = 'MineIDE-Compiler'
+version = '0.0.1'
+compileJava.options.encoding = 'UTF-8'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/main/java'
+        }
+        resources {
+            srcDirs 'src/main/resources'
+        }
+    }
+}
+
+dependencies {
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.13'
+}
+
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.artifactory'
+
+artifactory {
+    contextUrl = "${artifactory_contextUrl}"
+    publish {
+        repository {
+            repoKey = 'Leviathan'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+        }
+        defaults {
+            publications ('mavenJava')
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
