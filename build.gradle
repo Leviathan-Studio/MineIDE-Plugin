@@ -33,7 +33,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 
 group = "com.leviathanstudio.mineide"
-archivesBaseName = 'MineIDE-Compiler'
+archivesBaseName = 'MineIDE-Plugin'
 version = '0.0.1'
 compileJava.options.encoding = 'UTF-8'
 sourceCompatibility = 1.8
@@ -51,6 +51,7 @@ sourceSets {
 }
 
 dependencies {
+    compileOnly 'org.projectlombok:lombok:1.16.8'
 }
 
 task wrapper(type: Wrapper) {
